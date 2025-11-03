@@ -1,0 +1,30 @@
+{
+  "name": "uniquad",
+  "version": "1.0.0",
+  "description": "A website that is designed for seemless integration with any university without interfering with existing systems or processes, to ensure that students can connect with eachother on campus following the universities' guidelines and policies. To achieve seemless integration, UniQuad aims to utilize existing system and information that the university already stores.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon mern-stack/backend/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pahidalgo25/UniQuad.git"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pahidalgo25/UniQuad/issues"
+  },
+  "homepage": "https://github.com/pahidalgo25/UniQuad#readme",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "mongodb": "^6.20.0",
+    "mongoose": "^8.19.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
