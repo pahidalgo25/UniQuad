@@ -1,8 +1,8 @@
 const wrapper = document.querySelector('.wrapper');
 const signinLink = document.querySelector('.signin-link');
-const signupLink = document.querySelector('.signup-link');
+const createaccountLink = document.querySelector('.createaccount-link');
 
-signupLink.addEventListener('click', () => {
+createaccountLink.addEventListener('click', () => {
     wrapper.classList.add('active');
 });
 

@@ -69,13 +69,13 @@ body {
     transform: translateX(-400px);
 }
 
-.wrapper .form-box.signup {
+.wrapper .form-box.createaccount {
     position: absolute;
     transition: none;
     transform: translateX(400px);
 }
 
-.wrapper.active .form-box.signup {
+.wrapper.active .form-box.createaccount {
     transition: transform .18s ease;
     transform: translateX(0);
 }
@@ -159,7 +159,7 @@ body {
     font-weight: 500;
 }
 
-.signin-signup {
+.signin-createaccount {
     font-size: .9em;
     color: #043927;
     text-align: center;
@@ -167,12 +167,12 @@ body {
     margin: 25px 0 10px;
 }
 
-.signin-signup p a {
+.signin-createaccount p a {
     color: #043927;
     text-decoration: none;
     font-weight: 600;
 }
 
-.signin-signup p a:hover {
+.signin-createaccount p a:hover {
     text-decoration: underline;
 }
