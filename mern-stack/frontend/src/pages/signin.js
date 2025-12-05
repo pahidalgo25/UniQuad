@@ -9,3 +9,20 @@ createaccountLink.addEventListener('click', () => {
 signinLink.addEventListener('click', () => {
     wrapper.classList.remove('active');
 });
+
+const signinLinkNav = document.getElementById("signinLink");
+const profileIcon = document.getElementById("profileIcon");
+
+if (localStorage.getItem("loggedIn") === "true") {
+    showProfileIcon();
+}
+
+function handleLoginSuccess() {
+    localStorage.setItem("loggedIn", "true");
+    showProfileIcon();
+}
+
+function showProfileIcon() {
+    signinLinkNav.style.display = "none";
+    profileIcon.style.display = "inline";
+}
