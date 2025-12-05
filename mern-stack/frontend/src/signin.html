@@ -55,6 +55,7 @@
         //Example validation
         if (email === "johndoe@gmail.com" && password === "25Bulldogs") {
             errorMsg.textContent = "";
+            handleLoginSuccess();
         } else {
             errorMsg.textContent = "Invalid email or password.";
         }
