@@ -9,27 +9,27 @@
 
 <div class="topnav">
   
-  <img src="logo.png" alt="" srcset="">
+  <img src="logo.png">
 
   <a href="home.html">Home</a>
   <a href="#clubs">Clubs</a>
   <a href="#events">Events</a>
-  <a class="active" href="signin.html">Sign In</a>
+  <a class="active" id="signInLink" href="signin.html">Sign In</a>
+  <img id="profileIcon" src="icon.png" style="display:none; width:40px;">"
 </div>
 
 
 <div class="wrapper">
     <div class="form-box signin">
         <h2>Sign In</h2>
-        <form action = "home.html" method="get">
+        <form id="loginForm">
             <div class="input-box">
                 <span class="icon"></span>
-                <input type="email" required>
+                <input type="email" id="email" required>
                 <label>Email</label>
             </div>
             <div class="input-box">
-                <span class="icon"></span>
-                <input type="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$" required>
+                <input type="password" id="password" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$" required>
                 <label>Password</label>
             </div>
             <div class="remember-forgot">
@@ -37,8 +37,7 @@
                 Remember me</label>
                 <a href=""#">Forgot Password?</a>
             </div>
-            <button type="submit" class="btn">Sign In
-            </button>
+            <button type="submit" class="btn">Sign In</button>
             <div class="signin-createaccount">
                 <p>Don't have an account?<a href="#" class ="createaccount-link">Create Account</a></p>
             </div>
@@ -47,15 +46,17 @@
     </div>
 
     <script>
-        document.getElementById("form-box signin").addEventListener("submit", function(e) {
-        const email = document.getElementById("email").value.trim;
-        const password = document.getElementById("password").value.trim;
+        document.getElementById("loginForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value.trim();
         const errorMsg = document.getElementById("error");
 
         //Example validation
         if (email === "johndoe@gmail.com" && password === "25Bulldogs") {
+            sessionStorage.setItem("loggedIn", "true");
             errorMsg.textContent = "";
-            handleLoginSuccess();
+            window.location.href = "home.html";
         } else {
             errorMsg.textContent = "Invalid email or password.";
         }

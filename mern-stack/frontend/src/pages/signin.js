@@ -17,11 +17,6 @@ if (localStorage.getItem("loggedIn") === "true") {
     showProfileIcon();
 }
 
-function handleLoginSuccess() {
-    localStorage.setItem("loggedIn", "true");
-    showProfileIcon();
-}
-
 function showProfileIcon() {
     signinLinkNav.style.display = "none";
     profileIcon.style.display = "inline";
