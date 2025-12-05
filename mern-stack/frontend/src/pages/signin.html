@@ -65,28 +65,27 @@
 
     <div class="form-box createaccount">
         <h2>Create Account</h2>
-        <form action = "#">
+        <form id="signupForm" onsubmit="validateForm(event)">
             <div class="input-box">
                 <span class="icon"></span>
-                <input type="text" required>
+                <input type="text" id="username" required>
                 <label>Username</label>
             </div>
             <div class="input-box">
                 <span class="icon"></span>
-                <input type="email" required>
+                <input type="email" id="signupEmail" required>
                 <label>Email</label>
             </div>
             <div class="input-box">
                 <span class="icon"></span>
-                <input type="password" required>
+                <input type="password" id="signupPassword" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$" required>
                 <label>Password</label>
             </div>
             <div class="remember-forgot">
                 <label><input type="checkbox">
                 I agree to the terms & conditions</label>
             </div>
-            <button type="submit" class="btn">Create Account
-            </button>
+            <button type="submit" class="btn">Create Account</button>
             <div class="signin-createaccount">
                 <p>Already have an account?<a href="#" class ="signin-link">Sign In</a></p>
             </div>
@@ -95,5 +94,23 @@
 </div>
 
     <script src="signin.js"></script>
+    <script>
+            function validateForm(event) {
+                event.preventDefault(); // prevent default form submission
+
+                const username = document.getElementById('username').value.trim();
+                const email = document.getElementById('signupEmail').value.trim();
+                const password = document.getElementById('signupPassword').value.trim();
+
+                if (!username || !email || !password) {
+                    alert('Please fill all required fields.');
+                    return false;
+                }
+
+                // Redirect to home page after successful validation
+                sessionStorage.setItem("loggedIn", "true");
+                window.location.href = 'home.html';
+            }
+        </script>
 </body>
 </html>
