@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">  
+    <link rel="stylesheet" href="events.css">  
+    </head>
+    <body>
+        <div class="topnav">
+
+            <img src="logo.png">
+
+            <a href="home.html">Home</a>
+            <a href="#clubs">Clubs</a>
+            <a class="active" href="events.html">Events</a>
+            <a id="signinLink" href="signin.html">Sign In</a>
+            <img id="profileIcon" src="icon.png" style="display:none; width:40px;">
+        </div>
+
+        <button class="calendar-btn" onclick="openCalendar()">Open Calendar</button>
+
+        <div class="overlay" id="calendarOverlay">
+            <div class="calendar-container">
+                <div class="calendar-header">
+                    <button onclick="prevMonth()">&#8592;</button>
+                    <h3 id="monthYear"></h3>
+                    <button onclick="nextMonth()">&#8594;</button>
+                </div>
+                <div class="calendar-grid" id="calendarGrid"></div>
+                <br>
+                <button class="close-btn" onclick="closeCalendar()">Close</button>
+            </div>
+        </div>
+        <script src="events.js"></script>
+        <script>
+        const signinLinkNav = document.getElementById("signinLink");
+        const profileIcon = document.getElementById("profileIcon");
+
+        // If the user is logged in, hide Sign In and show profile
+        if (sessionStorage.getItem("loggedIn") === "true") {
+            signinLinkNav.style.display = "none";
+            profileIcon.style.display = "inline";
+        }
+        </script>
+    </body>
+</html>
