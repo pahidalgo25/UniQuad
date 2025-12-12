@@ -1,0 +1,270 @@
+body {
+  margin: 0;
+  font-family: Georgia, Arial, sans-serif;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #043927;
+}
+
+.topnav img {
+  float: left;
+  max-width: 125px;
+  margin-right: auto;
+}
+
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.topnav a:hover {
+  background-color: #cfb668;
+  color: black;
+}
+
+.topnav a.active {
+  background-color: #cfb668;
+  color: black;
+}
+
+.clubinfopage{
+    border: 2x solid red;
+    border-radius: 5px; 
+}
+
+.container{
+    display: grid;
+    grid-template-columns: 55% 45%;
+    background-color: yellow;
+    padding:10x;
+}
+.container div{
+    background-color:#E1C57A;
+    border:1x solid black;
+    padding:10px;
+    font-size: 17px;
+    text-align:center;
+}
+.subcontainer{
+    display:grid;
+    background-color:#E1C57A;
+    padding:10px;
+    font-size:30px;
+    text-align:center;
+}
+.right-fixeded {
+  position: fixed;
+  top: 47px;
+  right: 0;
+  width: 40%;
+  height: 100vh;
+  background: lightgreen;
+  padding: 20px;
+  opacity:0%;
+}
+
+.left-scroll {
+  width: 50%;
+  padding: 20px;
+}
+.split {
+  display: flex;
+  height: 100vh;
+}
+
+.fixed-side {
+  flex: 1;
+  background: #cce5ff;
+  position: sticky;
+  top: 0;
+}
+
+.scroll-side {
+  flex: 1;
+  background: #f8f9fa;
+  overflow-y: auto;
+  padding: 20px;
+}
+.clublistingcontainer{
+  padding:20px;
+  size: 40px;
+}
+/* stuff */
+.layout {
+    display: flex;
+    margin-top: 20px;
+}
+
+/* LEFT SIDE SCROLLS */
+.left-scroll {
+    width: 55%;
+    padding: 20px;
+    height: calc(100vh - 90px);
+    overflow-y: auto;
+    background: #f9f9f9;
+}
+
+/* RIGHT SIDE FIXED */
+.right-fixed {
+    width: 40%;
+    position: fixed;
+    right: 0;
+    top: 90px;
+    height: calc(100vh - 90px);
+    padding: 20px;
+    background: white;
+    border-left: 1px solid #ddd;
+    overflow-y: auto;
+}
+
+/* TITLE */
+.title {
+    margin-top: 0;
+}
+
+/* SEARCH BAR + FILTERS */
+.search-bar {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.search-bar input {
+    flex: 1;
+    padding: 10px;
+}
+
+.search-bar button {
+    background: #006341;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+}
+
+.filters, .subfilters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.filters label, .subfilters label {
+    background: #e6e6e6;
+    padding: 6px 10px;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* CLUB CARDS */
+.club-card {
+    display: flex;
+    background: #d8b559;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    gap: 15px;
+}
+
+.club-image {
+    width: 90px;
+    height: 90px;
+    border-radius: 6px;
+    background: #ccc;
+}
+
+.placeholder {
+    background: #bbb;
+}
+
+.club-info h2 {
+    margin: 0 0 5px 0;
+}
+
+.buttons {
+    margin-top: 10px;
+    display: flex;
+    gap: 10px;
+}
+
+.view {
+    background: #007b5e;
+    color: white;
+    border: none;
+    padding: 7px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.join {
+    background: #008f35;
+    color: white;
+    border: none;
+    padding: 7px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* RIGHT SIDEBAR DETAILS */
+.club-detail {
+    padding: 10px;
+}
+
+.club-detail .category {
+    color: #777;
+    font-size: 14px;
+}
+
+.description {
+    line-height: 1.4em;
+    margin-bottom: 20px;
+}
+
+.officers {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.officer {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.officer img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+
+.stats {
+    display: flex;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.stat {
+    flex: 1;
+    background: #f3f3f3;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.join-wide {
+    background: #006341;
+    color: white;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    margin-top: 20px;
+}

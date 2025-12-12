@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="club.css">
+</head>
+<body>
+<style> 
+  .grid-container {
+    display:grid;
+    grid-template-columns: 55% 45%;
+  }
+</style>
+
+<div class="topnav">
+  <img src="logo.png" alt="">
+  <a href="home.html">Home</a>
+  <a class="active" href="club.html">Clubs</a>
+  <a href="events.html">Events</a>
+  <a href="signin.html">Sign In</a>
+</div>
+
+<div class="layout">
+
+    <!-- LEFT PANEL (scrollable) -->
+    <div class="left-scroll">
+
+        <h1 class="title">Search For Clubs</h1>
+
+        <!-- Search Bar -->
+        <div class="search-bar">
+            <input type="text" placeholder="Search">
+            <button>Filters</button>
+        </div>
+
+        <!-- Filters -->
+        <div class="filters">
+            <label><input type="checkbox"> Academic</label>
+            <label><input type="checkbox"> Cultural</label>
+            <label><input type="checkbox"> Fraternity</label>
+            <label><input type="checkbox"> Sorority</label>
+            <label><input type="checkbox"> Political</label>
+            <label><input type="checkbox"> Religious</label>
+            <label><input type="checkbox"> Service</label>
+            <label><input type="checkbox"> Recreational</label>
+        </div>
+
+        <div class="subfilters">
+            <span>Colleges:</span>
+            <label><input type="checkbox"> Arts & Letters</label>
+            <label><input type="checkbox"> Business</label>
+            <label><input type="checkbox"> Engineering & Computer Science</label>
+            <label><input type="checkbox"> Natural Sciences</label>
+        </div>
+
+        <!-- CLUB CARDS -->
+<!-- Business Analytics Society -->
+<div class="club-card" data-category="Academic" data-college="Business">
+    <img src="ion.webp" class="club-image">
+    <div class="club-info">
+        <h2>Business Analytics Society</h2>
+        <p>Academic • College of Business</p>
+        <div class="buttons">
+            <button class="view">View</button>
+            <button class="join">Join</button>
+        </div>
+    </div>
+</div>
+
+<!-- Clinical Insights for Speech Pathology -->
+<div class="club-card" data-category="Academic" data-college="Health">
+    <img src="ion.webp" class="club-image">
+    <div class="club-info">
+        <h2>Clinical Insights for Speech Pathology</h2>
+        <p>Academic • Health & Human Services</p>
+        <div class="buttons">
+            <button class="view">View</button>
+            <button class="join">Join</button>
+        </div>
+    </div>
+</div>
+
+<!-- Data Science Club -->
+<div class="club-card" data-category="Academic" data-college="Engineering & Computer Science">
+    <img src="ion.webp" class="club-image">
+    <div class="club-info">
+        <h2>Data Science Club</h2>
+        <p>Academic • Engineering & Computer Science</p>
+        <div class="buttons">
+            <button class="view" data-club="data-science">View</button>
+            <button class="join">Join</button>
+        </div>
+    </div>
+</div>
+
+<!-- Business Analytics Society #2 -->
+<div class="club-card" data-category="Academic" data-college="Business">
+    <img src="ion.webp" class="club-image">
+    <div class="club-info">
+        <h2>Business Analytics Society</h2>
+        <p>Academic • College of Business</p>
+        <div class="buttons">
+            <button class="view">View</button>
+            <button class="join">Join</button>
+        </div>
+    </div>
+</div>
+
+<!-- Wordle Society -->
+<div class="club-card" data-category="Recreational" data-college="None">
+    <img src="ion.webp" class="club-image">
+    <div class="club-info">
+        <h2>Wordle Society</h2>
+        <p>Recreational</p>
+        <div class="buttons">
+            <button class="view">View</button>
+            <button class="join">Join</button>
+        </div>
+    </div>
+</div>
+
+    <!-- RIGHT PANEL (hidden until clicked) -->
+    <div class="right-fixed" id="right-panel" style="display:none;">
+
+        <div class="club-detail">
+            <h2>Data Science Club</h2>
+            <p class="category">Academic • College of ECS & Natural Sciences</p>
+
+            <p class="description">
+                The Data Science Club at Sac State aims to empower students by offering
+                workshops and educational resources essential in the data science industry.
+            </p>
+
+            <h3>Officers</h3>
+            <div class="officers">
+                <div class="officer">
+                    <img src="icon.png">
+                    <span>President<br><b>Catalina Escano</b></span>
+                </div>
+                <div class="officer">
+                    <img src="icon.png">
+                    <span>Treasurer<br><b>Ben Duong</b></span>
+                </div>
+            </div>
+
+            <h3>Advisor</h3>
+            <div class="officer">
+                <img src="icon.png">
+                <span>Professor<br><b>Clark Fitzgerald</b></span>
+            </div>
+
+            <h3>Stats</h3>
+            <div class="stats">
+                <div class="stat">
+                    <div class="icon">👤</div>
+                    <p><b>23</b> Members</p>
+                </div>
+                <div class="stat">
+                    <div class="icon">📬</div>
+                    <p><b>272</b> Mailbox #</p>
+                </div>
+            </div>
+
+            <button class="join-wide">Join</button>
+        </div>
+
+    </div>
+</div>
+
+<!-- =================== FUNCTIONALITY SCRIPT =================== -->
+<script>
+// Hide panel by default
+const rightPanel = document.getElementById("right-panel");
+rightPanel.style.display = "none";
+
+// VIEW BUTTON LOGIC
+document.querySelectorAll(".view").forEach(btn => {
+    btn.addEventListener("click", () => {
+        if (btn.dataset.club === "data-science") {
+            rightPanel.style.display = "block";
+            rightPanel.scrollIntoView({ behavior: "smooth" });
+        }
+    });
+});
+
+// JOIN BUTTON LOGIC — asks user for confirmation
+document.querySelectorAll(".join, .join-wide").forEach(btn => {
+    btn.addEventListener("click", () => {
+
+        // Find the club name by reading the <h2> inside the same card or detail panel
+        let clubName = "this club";
+
+        // If the button is inside a card
+        const card = btn.closest(".club-info");
+        if (card) {
+            clubName = card.querySelector("h2").innerText;
+        }
+
+        // If inside right panel (join-wide)
+        const detailPanelTitle = document.querySelector(".club-detail h2");
+        if (btn.classList.contains("join-wide") && detailPanelTitle) {
+            clubName = detailPanelTitle.innerText;
+        }
+
+        // User must be signed in
+        if (sessionStorage.getItem("loggedIn") !== "true") {
+            alert("You must be signed in to join a club.");
+            window.location.href = "signin.html";
+            return;
+        }
+
+        // Confirm join
+        const wantsToJoin = confirm(`Do you want to join ${clubName}?`);
+
+        if (wantsToJoin) {
+            alert(`You have joined ${clubName}!`);
+        }
+    });
+});
+/* =============== FILTER LOGIC =============== */
+
+// Whenever a filter changes, re-run filtering
+document.querySelectorAll(".filters input, .subfilters input").forEach(filter => {
+    filter.addEventListener("change", applyFilters);
+});
+
+function applyFilters() {
+    const selectedCategories = [...document.querySelectorAll(".filters input:checked")].map(i => i.parentElement.innerText.trim());
+    const selectedColleges = [...document.querySelectorAll(".subfilters input:checked")].map(i => i.parentElement.innerText.trim());
+
+    document.querySelectorAll(".club-card").forEach(card => {
+        const category = card.dataset.category;
+        const college = card.dataset.college;
+
+        const categoryMatch = selectedCategories.length === 0 || selectedCategories.includes(category);
+        const collegeMatch = selectedColleges.length === 0 || selectedColleges.includes(college);
+
+        // Show only if BOTH match
+        if (categoryMatch && collegeMatch) {
+            card.style.display = "flex";
+        } else {
+            card.style.display = "none";
+        }
+    });
+}
+
+// Run filters once at page load
+applyFilters();
+
+</script>
+
+
+</body>
+</html>

@@ -6,28 +6,34 @@
 </head>
 <body>
 
-
+<!-- TOP NAV -->
 <div class="topnav">
-  
-  <img src="logo.png" alt="" srcset="">
+  <img src="logo.png" alt="" srcset="" class="nav-logo">
 
   <a class="active" href="home.html">Home</a>
-  <a href="#clubs">Clubs</a>
+  <a href="club.html">Clubs</a>
   <a href="events.html">Events</a>
   <a id="signinLink" href="signin.html">Sign In</a>
   <img id="profileIcon" src="icon.png" style="display:none; width:40px;">
 </div>  
 
-<div style="padding-left:16px">
-  <h2>Home</h2>
-  <p>Some content...</p>
-</div>
+<!-- MAIN UNIQUAD HERO SECTION -->
+<section class="hero">
+    <div class="hero-content">
+        <h1>🏫 UniQuad</h1>
+        <p>Welcome to UniQuad! Please Sign In To See Your Homepage</p>
+
+        <button class="main-signin-btn" onclick="window.location.href='signin.html'">
+            Sign In
+        </button>
+    </div>
+</section>
 
 <script>
 const signinLinkNav = document.getElementById("signinLink");
 const profileIcon = document.getElementById("profileIcon");
 
-// If the user is logged in, hide Sign In and show profile
+// If the user is logged in, hide Sign In and show profile icon
 if (sessionStorage.getItem("loggedIn") === "true") {
     signinLinkNav.style.display = "none";
     profileIcon.style.display = "inline";

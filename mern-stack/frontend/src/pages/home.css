@@ -1,3 +1,5 @@
+/* ---------------- EXISTING NAV + BASE CSS ---------------- */
+
 body {
   margin: 0;
   font-family: Georgia, Arial, sans-serif;
@@ -16,7 +18,7 @@ body {
 
 .topnav a {
   float: left;
-  color: #f2f2f2;
+  color: #ffffff;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
@@ -33,3 +35,48 @@ body {
   color: black;
 }
 
+/* ---------------- NEW UNIQUAD HOMEPAGE CSS ---------------- */
+
+
+/* Fix logo in nav to keep consistent look */
+.nav-logo {
+    height: 45px;
+    margin-right: 20px;
+}
+
+/* Hero section layout */
+.hero {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+    text-align: center;
+    padding: 20px;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.hero-content p {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    color: #333;
+}
+
+/* Main sign-in button */
+.main-signin-btn {
+    background: #e0a21a;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.main-signin-btn:hover {
+    opacity: 0.85;
+}
