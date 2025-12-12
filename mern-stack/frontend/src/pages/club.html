@@ -33,6 +33,8 @@
             <button>Filters</button>
         </div>
 
+        <button id="createClubBtn" class="create-btn">➕ Create a Club</button>
+
         <!-- Filters -->
         <div class="filters">
             <label><input type="checkbox"> Academic</label>
@@ -167,6 +169,110 @@
     </div>
 </div>
 
+<!-- create club popup -->
+<div id="clubFormPopup" class="popup-overlay" style="display:none;">
+  <div class="popup">
+    <h2>Create a Club</h2>
+
+    <label>Club Name:</label>
+    <input id="newClubName" type="text">
+
+    <label>Category:</label>
+    <select id="newClubCategory">
+      <option>Academic</option>
+      <option>Cultural</option>
+      <option>Fraternity</option>
+      <option>Sorority</option>
+      <option>Political</option>
+      <option>Religious</option>
+      <option>Service</option>
+      <option>Recreational</option>
+    </select>
+
+    <label>College (optional):</label>
+    <select id="newClubCollege">
+      <option>None</option>
+      <option>Arts & Letters</option>
+      <option>Business</option>
+      <option>Engineering & Computer Science</option>
+      <option>Natural Sciences</option>
+      <option>Health</option>
+    </select>
+
+    <label>Description:</label>
+    <textarea id="newClubDescription"></textarea>
+
+    <h3>Officers</h3>
+    <div id="officerList"></div>
+
+    <button id="addOfficerBtn" type="button">Add Officer</button>
+
+    <style>
+    #officerList .officer-entry {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 8px;
+    }
+    #officerList input {
+        flex: 1;
+    }
+    .remove-officer {
+        background: #d9534f;
+        color: white;
+        border: none;
+        padding: 4px 8px;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+    #addOfficerBtn {
+        margin: 10px 0;
+        padding: 6px 10px;
+        border: none;
+        background-color: #006341;
+        color: white;
+        border-radius: 6px;
+        cursor: pointer;
+    }
+    </style>
+
+    <h3>Advisor</h3>
+    <input type="text" id="advisorName" placeholder="Advisor Name">
+
+    <div class="popup-buttons">
+      <button id="cancelCreate">Cancel</button>
+      <button id="submitCreate">Create Club</button>
+    </div>
+  </div>
+</div>
+
+<style>
+.popup-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.popup {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 350px;
+}
+.popup input, .popup select, .popup textarea {
+  width: 100%;
+  margin-bottom: 10px;
+}
+.popup-buttons {
+  text-align: right;
+}
+.popup-buttons button {
+  margin-left: 8px;
+}
+</style>
+
 <!-- =================== FUNCTIONALITY SCRIPT =================== -->
 <script>
 // Hide panel by default
@@ -246,6 +352,222 @@ function applyFilters() {
 
 // Run filters once at page load
 applyFilters();
+
+// create club logic
+
+const createBtn = document.getElementById("createClubBtn");
+const popup = document.getElementById("clubFormPopup");
+const cancelCreate = document.getElementById("cancelCreate");
+const submitCreate = document.getElementById("submitCreate");
+
+createBtn.addEventListener("click", () => {
+    if (sessionStorage.getItem("loggedIn") !== "true") {
+        alert("You must be signed in to create a club.");
+        window.location.href = "signin.html";
+        return;
+    }
+    popup.style.display = "flex";
+});
+
+cancelCreate.addEventListener("click", () => {
+    popup.style.display = "none";
+});
+
+// CREATE CLUB — OFFICER ADD/REMOVE UI
+const officerList = document.getElementById("officerList");
+const addOfficerBtn = document.getElementById("addOfficerBtn");
+
+addOfficerBtn.addEventListener("click", () => {
+    const div = document.createElement("div");
+    div.classList.add("officer-entry");
+
+    div.innerHTML = `
+        <input type="text" class="officer-role" placeholder="Role (e.g. President)">
+        <input type="text" class="officer-name" placeholder="Full Name">
+        <button class="remove-officer">X</button>
+    `;
+
+    // remove button
+    div.querySelector(".remove-officer").addEventListener("click", () => {
+        div.remove();
+    });
+
+    officerList.appendChild(div);
+});
+
+// Create the club card and insert it dynamically
+submitCreate.addEventListener("click", () => {
+    const name = document.getElementById("newClubName").value.trim();
+    const category = document.getElementById("newClubCategory").value;
+    const college = document.getElementById("newClubCollege").value;
+    const description = document.getElementById("newClubDescription").value.trim();
+    // Collect officers
+    const officers = [...document.querySelectorAll(".officer-entry")].map(entry => {
+        return {
+            role: entry.querySelector(".officer-role").value.trim(),
+            name: entry.querySelector(".officer-name").value.trim()
+        };
+    });
+
+    const advisorName = document.getElementById("advisorName").value.trim();
+    const advisorRole = document.getElementById("advisorRole") 
+        ? document.getElementById("advisorRole").value.trim() 
+        : "";
+
+    if (name === "") {
+        alert("Club name is required.");
+        return;
+    }
+
+    // Create new club card HTML
+    const card = document.createElement("div");
+    card.classList.add("club-card");
+    card.dataset.category = category;
+    card.dataset.college = college;
+
+    card.innerHTML = `
+        <img src="ion.webp" class="club-image">
+        <div class="club-info">
+            <h2>${name}</h2>
+            <p>${category} • ${college}</p>
+            <div class="buttons">
+                <button class="view">View</button>
+                <button class="join">Join</button>
+            </div>
+        </div>
+    `;
+
+    // Add card to the list
+    document.querySelector(".left-scroll").appendChild(card);
+
+    // Close popup
+    popup.style.display = "none";
+
+    // Re-apply filters so it appears correctly
+    applyFilters();
+
+    // Re-enable VIEW & JOIN button logic for the new card
+    card.querySelector(".join").addEventListener("click", joinHandler);
+    card.querySelector(".view").addEventListener("click", () => {
+    openClubDetail({
+        name,
+        category,
+        college,
+        description,
+        officers,
+        advisor: {
+            name: advisorName,
+            role: advisorRole
+        },
+        members: 0,
+        mailbox: Math.floor(Math.random() * 500) + 1
+    });
+});
+
+    alert("Club created!");
+});
+
+// Reusable JOIN logic
+function joinHandler() {
+    let clubName = this.closest(".club-info").querySelector("h2").innerText;
+
+    if (sessionStorage.getItem("loggedIn") !== "true") {
+        alert("You must be signed in to join a club.");
+        window.location.href = "signin.html";
+        return;
+    }
+
+    if (confirm(`Do you want to join ${clubName}?`)) {
+        alert(`You have joined ${clubName}!`);
+    }
+}
+
+// dynamic right panel generator
+
+function openClubDetail(club) {
+    const panel = document.getElementById("right-panel");
+    panel.style.display = "block";
+    panel.scrollIntoView({ behavior: "smooth" });
+
+    let officerHTML = "";
+
+    if (club.officers && club.officers.length > 0) {
+        officerHTML = club.officers.map(o => `
+            <div class="officer">
+                <img src="icon.png">
+                <span>${o.role}<br><b>${o.name}</b></span>
+            </div>
+    `   ).join("");
+    } else {
+        officerHTML = `<p style="opacity:0.7;">(No officers added)</p>`;
+    }
+
+    let advisorHTML = "";
+
+    if (club.advisor && club.advisor.name) {
+        advisorHTML = `
+            <div class="officer">
+                <img src="icon.png">
+                <span>${club.advisor.role || "Advisor"}<br><b>${club.advisor.name}</b></span>
+            </div>
+    `   ;
+    } else {
+        advisorHTML = `<p style="opacity:0.7;">(No advisor added)</p>`;
+    }
+
+    panel.innerHTML = `
+        <div class="club-detail">
+            <h2>${club.name}</h2>
+            <p class="category">${club.category} • ${club.college}</p>
+
+            <p class="description">${club.description}</p>
+
+            <h3>Officers</h3>
+            <div class="officers">
+                ${officerHTML}
+            </div>
+
+            <h3>Advisor</h3>
+            <div class="officer">
+                ${advisorHTML}
+            </div>
+
+            <h3>Stats</h3>
+            <div class="stats">
+                <div class="stat">
+                    <div class="icon">👤</div>
+                    <p><b>${club.members}</b> Members</p>
+                </div>
+                <div class="stat">
+                    <div class="icon">📬</div>
+                    <p><b>${club.mailbox}</b> Mailbox #</p>
+                </div>
+            </div>
+
+            <button class="join-wide" data-club-name="${club.name}">
+                Join
+            </button>
+        </div>
+    `;
+
+    // Attach JOIN logic
+    panel.querySelector(".join-wide").addEventListener("click", joinDetailPanelHandler);
+}
+
+// Join button when inside the dynamic right panel
+function joinDetailPanelHandler() {
+    const clubName = this.dataset.clubName;
+
+    if (sessionStorage.getItem("loggedIn") !== "true") {
+        alert("You must be signed in to join a club.");
+        window.location.href = "signin.html";
+        return;
+    }
+
+    if (confirm(`Do you want to join ${clubName}?`)) {
+        alert(`You have joined ${clubName}!`);
+    }
+}
 
 </script>
 
